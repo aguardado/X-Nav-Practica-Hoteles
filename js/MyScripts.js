@@ -17,6 +17,7 @@ function show_accomodation(){
 	
 	if($(this).css("color") == "rgb(0, 0, 0)"){
 		map.removeLayer(marker);
+		$(this).css("color") == "rgb(0, 0, 255)"
 	}else{
 		map.setView([lat, lon], 15);
 	}
