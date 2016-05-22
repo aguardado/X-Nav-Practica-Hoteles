@@ -1,4 +1,3 @@
-var key = "637536a0a34d1112ea654bf6bf86eede8232c336";
 var newCollection = new Object();
 
 function show_accomodation(){
@@ -102,6 +101,18 @@ $(document).ready(function(){
 		$(".js-view").css("display", "none");
 		$("#" + data).css("display", "block");
 	});
+	
+	$(".save").click(function(){
+		var token = $("#token").val();
+		var repo = $("#repositorio").val();
+		var file = $("#nombre").val();
+		var texto = JSON.stringify(collection);
+		var github = new Github({token:token,auth:"oauth"});
+
+		var texto = JSON.stringify(collection);
+		var repository = github.getRepo("aguardado", repo);
+		repository.write("master", file, texto, "file", function(err){});
+	});
 		
 	$(".zona-arrastre").droppable({
 		accept: "#list li",
@@ -120,15 +131,14 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(".save").click(function(){
-		var token = $("#token").val();
-		var repo = $("#repositorio").val();
-		var file = $("#nombre").val();
-		var github = new Github({token:token,auth:"oauth"});
-
-		var texto = JSON.stringify(collection);
-		var repository = github.getRepo("aguardado", repo);
-		repository.write("master", file, texto, "file", function(err){});
+	$('.js-set-name').click(function(){
+		var name = $('#name-collection').val();
+		console.log(name);
+		if(name == "")
+			return;
+			
+		$(".name-collection").html(name);
+		newCollection[name] = [];
 	});
 	
 });
