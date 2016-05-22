@@ -107,7 +107,23 @@
 		</div>
 	</div>
 	<div id="hosted" class="js-view">
-		Alojados
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 item-alojados">
+					<label>Nombre usuario</label>
+					<input id="set-alojados" type="text" placeholder="Nombre" />
+					<span class="name-alojados"></span>
+					<button class="js-set-alojados">Asignar usuario Google+</button>
+					<div class="zona-usuarios">
+						<ul></ul>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 item-collection">
+					<button class="save">Guardar Coleccion</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<div class="container">
@@ -135,6 +151,7 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
     <script type="text/javascript" src="js/APIgithub.js"></script>
     <script type="text/javascript" src="js/MyScripts.js"></script>
     

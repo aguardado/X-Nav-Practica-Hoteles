@@ -1,4 +1,9 @@
 var newCollection = new Object();
+var apiKey = 'AIzaSyCIsboejQB1SBYOsR9K659Sd_G9GzYTAuY';
+
+
+//102452679496186691364
+//+GregorioRobles
 
 function show_accomodation(){
 	var accomodation = accomodations[$(this).attr('no')];
@@ -74,6 +79,34 @@ function evdrop(event){}
 
 function evend(event){}
 
+function handleClientLoad(){
+	console.log("plus");
+	gapi.client.setApiKey(apiKey);
+}
+	
+	
+function makeApiCall(user) {
+	handleClientLoad();
+	gapi.client.load('plus', 'v1', function() {
+		var request = gapi.client.plus.people.get({
+			'userId': user
+		});
+
+		request.execute(function(resp) {
+			var heading = document.createElement('h4');
+			var image = document.createElement('img');
+			image.src = resp.image.url;
+			heading.appendChild(image);
+			heading.appendChild(document.createTextNode(resp.displayName));
+
+			document.getElementById('set-alojados').appendChild(heading);
+			
+			$('.zona-usuarios').append(heading);
+			$('.zona-usuarios').append(image);
+		});
+	});
+}
+
 
 $(document).ready(function(){
 	map = L.map('map').setView([40.4175, -3.708], 11);
@@ -130,5 +163,18 @@ $(document).ready(function(){
 		$(".name-collection").html(name);
 		newCollection[name] = [];
 	});
+	
+	
+	
+	
+	$('.js-set-alojados').click(function(){
+		var user = $("#set-alojados").val();
+		console.log(user);
+		if(user == "")
+			return;
+			
+		makeApiCall(user);
+	});
+	
 	
 });
