@@ -68,19 +68,11 @@ function get_hoteles(){
 	});
 }
 
-function evdragover(event){
-	//var texto = event.dataTransfer.getData();
-	//console.log(texto);
-	//$(".zona-arrastre").append(texto);
-}
+function evdragover(event){}
 
-function evdrop(event){
-	console.log('evdrop');
-}
+function evdrop(event){}
 
-function evend(event){
-	console.log('evend');
-}
+function evend(event){}
 
 
 $(document).ready(function(){
@@ -106,12 +98,11 @@ $(document).ready(function(){
 		var token = $("#token").val();
 		var repo = $("#repositorio").val();
 		var file = $("#nombre").val();
-		var texto = JSON.stringify(collection);
+		var texto = JSON.stringify(newCollection);
 		var github = new Github({token:token,auth:"oauth"});
 
-		var texto = JSON.stringify(collection);
 		var repository = github.getRepo("aguardado", repo);
-		repository.write("master", file, texto, "file", function(err){});
+		repository.write("master", file, texto, "nueva coleccion", function(err){});
 	});
 		
 	$(".zona-arrastre").droppable({
@@ -119,21 +110,20 @@ $(document).ready(function(){
 		activeClass: "ui-state-hover",
 		hoverClass: "ui-state-active",
 		drop: function(event, ui) {
-			var name = $("#name-collection").val();
-			console.log(name);
+			var name = $(".name-collection").text();
 			if (name == ""){
 				return;
 			}
 			var no = ui.draggable[0].attributes[0].value;
 			var hotel = accomodations[no].basicData.name;
 			newCollection[name].push(accomodations[no]);
+			console.log();
 			$(".zona-arrastre ul").append("<li>" + hotel + "</li>");
 		}
 	});
 	
 	$('.js-set-name').click(function(){
 		var name = $('#name-collection').val();
-		console.log(name);
 		if(name == "")
 			return;
 			
