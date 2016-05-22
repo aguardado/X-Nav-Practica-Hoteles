@@ -7,6 +7,8 @@
 .container-cargar span{font-size: 15px; background-color: #ffbb00; color: #fff; padding: 10px; border-radius: 10px; cursor: pointer;}
 
 #map {width: 90%;height: 500px; margin: 0 auto;}
+#collection{display: none;}
+#hosted{display: none;}
 
 .info-extra{font-size: 20px; color: #ffbb00}
 #desc img{width: 100%;}
@@ -14,3 +16,11 @@
 #list ul{list-style: none; background-color: #d4ecff; padding: 20px 30px; border-radius: 15px; max-height: 500px; overflow-y: scroll;}
 #list ul li{font-size: 16px; color: #2fa4ff; cursor: pointer;}
 #list ul li.active{color: #000;}
+
+.item-collection{margin-bottom: 20px;}
+.item-collection label{display: block; color: #ffbb00;}
+.item-collection input{display: block; padding: 5px; border: 1px solid #aaa; border-radius: 5px;}
+.item-collection .zona-arrastre{width: 300px; height: 300px; background-color: #fde6a7; border-radius: 15px; text-align: left; padding-top: 20px; margin-bottom: 20px;}
+.item-collection button{background-color: #ffbb00; color: #fff; border: none; border-radius: 5px; padding: 10px; font-size: 16px;}
+.item-collection button:active{font-size: 12px;}
+

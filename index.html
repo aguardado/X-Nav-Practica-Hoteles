@@ -55,22 +55,58 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<span class="js-load-hoteles">Cargar hoteles</span>
-        <span class="js-colection">Coleccion</span>
-        <span class="js-gestion">Gestion de Alojados</span>
 			</div>
 		</div>
 	</div>
   
-  <div>
-    <ul id="myTab" class="nav nav-tabs" style="margin-bottom: 15px;">
-      <li class="active"><a href="#map" data-toggle="tab">Inicio</a></li>
-      <li><a href="#desc" data-toggle="tab">Coleccion</a></li>
-      <li><a href="#colecciones" data-toggle="tab">Gestion de Alojados</a></li>
-    </ul>
-  </div>
+	  <div>
+	    <ul id="myTab" class="nav nav-tabs" style="margin-bottom: 15px;">
+	      <li class="active"><a class="js-trigger-view" href="javascript:void(0);" data-toggle="map">Mapa</a></li>
+	      <li><a class="js-trigger-view" href="javascript:void(0);" data-toggle="collection">Colecciones</a></li>
+	      <li><a class="js-trigger-view" href="javascript:void(0);" data-toggle="hosted">Gestion de Alojados</a></li>
+	    </ul>
+	  </div>
   
 
-	<div id="map"></div>
+	<div id="map" class="js-view"></div>
+	
+	<div id="collection" class="js-view">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 item-collection">
+					<label>Nombre</label>
+					<input id="name-collection" type="text" placeholder="Nombre" />
+				</div>
+				<div class="col-xs-6 item-collection">
+					<label>Arrastra aqui los hoteles</label>
+					<div class="zona-arrastre" ondragover="evdragover(event)" ondrop="evdrop(event)">
+						<ul></ul>
+					</div>
+					
+				</div>
+				<div class="col-xs-6 item-collection">
+					<div class="item-collection">
+						<label>Token</label>
+						<input id="token" type="text" placeholder="token" />
+					</div>
+					<div class="item-collection">
+						<label>Repositorio</label>
+						<input id="repositorio" type="text" placeholder="repo" />
+					</div>
+					<div class="item-collection">
+						<label>Nombre JSON</label>
+						<input id="nombre" type="text" placeholder="JSON" />
+					</div>
+				</div>
+				<div class="col-xs-12 item-collection">
+					<button class="save">Guardar Coleccion</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="hosted" class="js-view">
+		Alojados
+	</div>
 	
 	<div class="container">
 		<div class="row">
@@ -78,99 +114,10 @@
 				
 			</div>
 			
-			<div class="col-sm-6" id="desc">
-
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
-              <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-              </ol>
-
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner" role="listbox">
-                <div id="image" class="item active">
-                  <div class="row">
-                        <div class="col-md-3"><img id="image1" style="max-width:100%;"></div>
-                      </div>
-                </div>
-
-                <div class="item">
-                  <div class="row">
-                        <div class="col-md-3"><img id="image2" style="max-width:100%;"></div>
-                      </div>
-                </div>
-
-                <div class="item">
-                  <div class="row">
-                        <div class="col-md-3"><img id="image3" style="max-width:100%;"></div>
-                      </div>
-                </div>
-
-                <div class="item">
-                  <div class="row">
-                        <div class="col-md-3"><img id="image4" style="max-width:100%;"></div>
-                      </div>
-                </div>
-              </div>
-
-              <!-- Left and right controls -->
-              <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
-			</div>
-			
-
-      <div class="tab-pane fade" id="colecciones">
-        <form id="form">
-          <div class="col-md-3" id="newcol">
-            <br><input type="submit" class="btn btn-primary" value="Crear Colección">
-            <input id="date" type="text" class="form-control" placeholder="colección">
-            
-
-          </div>
-        </form>
-        
-        <div class="atributos col-md-3" id="atributos">
-          <label>Colecciones:</label>
-          <div id="attr"><ul></ul></div>
-        </div>
-        <div class="listado col-md-3" id="listado">
-          <label>Nombre de la colección:</label>
-          <div id="name_col"><ul></ul></div>
-          <br>
-          <label>Listado de hoteles:</label>
-          <div id="list_hoteles"><ul></ul></div>
-        </div>
-      </div>
-
-
-
-
-      
-
-
-			
+			<div class="col-sm-6" id="desc"></div>
 		</div>
-
-    <div class="container container-cargar" >
-      <div class="row" >
-        <div class="col-xs-12">
-          <span class="js-new-colection">Guardar Coleccion</span>
-          <span class="js-old-colection">Cargar Coleccion</span>
-        </div>
-      </div>
-    </div>
-
 	</div>
+
 
       <hr>
 
@@ -186,6 +133,7 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script type="text/javascript" src="js/APIgithub.js"></script>
     <script type="text/javascript" src="js/MyScripts.js"></script>
     
        

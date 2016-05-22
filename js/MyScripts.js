@@ -1,3 +1,6 @@
+var key = "637536a0a34d1112ea654bf6bf86eede8232c336";
+var newCollection = new Object();
+
 function show_accomodation(){
 	var accomodation = accomodations[$(this).attr('no')];
 	var lat = accomodation.geoData.latitude;
@@ -57,11 +60,27 @@ function get_hoteles(){
 	    list = list + '</ul>';
 	    
 	    $('#list').html(list);
+	    $("#list li").attr("draggable", "true");
+	    $("#list li").draggable({revert:true,appendTo:"body",helper:"clone"});
 	    $('#list li').click(show_accomodation);
 	    $('#list li').click(function(){
 		   $(this).toggleClass('active');
 	    });
 	});
+}
+
+function evdragover(event){
+	//var texto = event.dataTransfer.getData();
+	//console.log(texto);
+	//$(".zona-arrastre").append(texto);
+}
+
+function evdrop(event){
+	console.log('evdrop');
+}
+
+function evend(event){
+	console.log('evend');
 }
 
 
@@ -75,10 +94,41 @@ $(document).ready(function(){
 	
 	$(".js-load-hoteles").click(get_hoteles);
 	
-	/*
-$(".js-load-hoteles").click(function(){
-		console.log("pepe");
-		get_hoteles();
+	$(".js-trigger-view").click(function(){
+		$(".js-trigger-view").closest("li").removeClass("active");
+		$(this).closest('li').addClass('active');
+		var data = $(this).attr('data-toggle');
+		
+		$(".js-view").css("display", "none");
+		$("#" + data).css("display", "block");
 	});
-*/
+		
+	$(".zona-arrastre").droppable({
+		accept: "#list li",
+		activeClass: "ui-state-hover",
+		hoverClass: "ui-state-active",
+		drop: function(event, ui) {
+			var name = $("#name-collection").val();
+			console.log(name);
+			if (name == ""){
+				return;
+			}
+			var no = ui.draggable[0].attributes[0].value;
+			var hotel = accomodations[no].basicData.name;
+			newCollection[name].push(accomodations[no]);
+			$(".zona-arrastre ul").append("<li>" + hotel + "</li>");
+		}
+	});
+	
+	$(".save").click(function(){
+		var token = $("#token").val();
+		var repo = $("#repositorio").val();
+		var file = $("#nombre").val();
+		var github = new Github({token:token,auth:"oauth"});
+
+		var texto = JSON.stringify(collection);
+		var repository = github.getRepo("aguardado", repo);
+		repository.write("master", file, texto, "file", function(err){});
+	});
+	
 });
